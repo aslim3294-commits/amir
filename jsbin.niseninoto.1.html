@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2026 by anonymous (http://jsbin.com/niseninoto/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>عالم العلوم والرياضيات | تعلم واستمتع</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Tahoma', 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9edf2 100%);
+            color: #1e2a3a;
+            line-height: 1.6;
+        }
+
+        /* شريط التنقل */
+        nav {
+            background: linear-gradient(90deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: rgba(255,255,255,0.2);
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .nav-links button:hover {
+            background: rgba(255,255,255,0.25);
+            transform: scale(1.05);
+        }
+
+        /* المحتوى الرئيسي */
+        .container {
+            max-width: 1300px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* بطاقات المواد */
+        .subjects {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 30px;
+            padding: 1.5rem;
+            width: 220px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+        }
+
+        .card-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .math { border-bottom: 8px solid #f39c12; }
+        .physics { border-bottom: 8px solid #3498db; }
+        .science { border-bottom: 8px solid #2ecc71; }
+
+        /* قسم العرض */
+        .content-area {
+            background: white;
+            border-radius: 40px;
+            padding: 2rem;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            min-height: 500px;
+        }
+
+        .level-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .level-btn {
+            background: #ecf0f1;
+            border: none;
+            padding: 0.7rem 1.8rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .level-btn.active {
+            background: #2a5298;
+            color: white;
+            box-shadow: 0 4px 10px rgba(42,82,152,0.4);
+        }
+
+        .lesson-card {
+            background: #f8faff;
+            border-radius: 30px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-right: 10px solid #2a5298;
+        }
+
+        .fun-fact {
+            background: #fff3e0;
+            border-radius: 25px;
+            padding: 1rem;
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .game-area {
+            background: #eef2ff;
+            border-radius: 30px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        button {
+            background: #2a5298;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #1e3c72;
+            transform: scale(1.02);
+        }
+
+        .quiz-option {
+            background: white;
+            margin: 0.5rem;
+            padding: 0.7rem;
+            border-radius: 60px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+        }
+        .quiz-option:hover {
+            background: #d4e0ff;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #1e2a3a;
+            color: white;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 0 1rem;
+            }
+            .card {
+                width: 160px;
+            }
+            .card-icon {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo" id="homeBtn">🔬🧪 عالم العلوم</div>
+    <div class="nav-links">
+        <button data-subject="math">📐 رياضيات</button>
+        <button data-subject="physics">⚡ فيزياء</button>
+        <button data-subject="science">🌿 علوم طبيعية</button>
+        <button id="gameNavBtn">🎮 ألعاب ومرح</button>
+    </div>
+</nav>
+
+<div class="container">
+    <!-- بطاقات سريعة -->
+    <div class="subjects">
+        <div class="card math" data-subject="math">
+            <div class="card-icon">📐</div>
+            <h3>رياضيات</h3>
+            <p>من الجبر إلى التفاضل</p>
+        </div>
+        <div class="card physics" data-subject="physics">
+            <div class="card-icon">⚡</div>
+            <h3>فيزياء</h3>
+            <p>قوانين الطبيعة</p>
+        </div>
+        <div class="card science" data-subject="science">
+            <div class="card-icon">🧬</div>
+            <h3>علوم طبيعية</h3>
+            <p>الأرض والحياة</p>
+        </div>
+    </div>
+
+    <!-- منطقة المحتوى الديناميكي -->
+    <div class="content-area" id="dynamicContent">
+        <!-- سيتم تعبئته بواسطة JS -->
+        <h2 style="text-align:center;">✨ مرحباً في رحلة العلم ✨</h2>
+        <p style="text-align:center; font-size:1.2rem;">اختر مادة أو اذهب إلى الألعاب ... تعلم واستمتع!</p>
+        <div style="text-align:center; margin-top:20px;">
+            <button id="startGameQuick">🎲 العب مسابقة سريعة الآن</button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>📚 موقع تعليمي تفاعلي | رياضيات - فيزياء - علوم طبيعية | للمرحلة المتوسطة والثانوية | تعلم ممتع للأعمار 11-22 سنة</p>
+</footer>
+
+<script>
+    // البيانات: الدروس حسب المادة والمستوى (متوسط / ثانوي)
+    const lessonsData = {
+        math: {
+            middle: [
+                { title: "📌 المعادلات البسيطة", content: "حل معادلات من الدرجة الأولى: س + 5 = 12 → س = 7. مثال: 3س - 4 = 11 → 3س = 15 → س = 5." },
+                { title: "📌 النسب المئوية", content: "النسبة المئوية تعني الجزء من 100. مثال: 20% من 80 = (20/100)*80 = 16." },
+                { title: "🧩 الهندسة: مساحة المربع", content: "مساحة المربع = طول الضلع × نفسه. إذا كان الضلع = 4 سم، المساحة = 16 سم²." }
+            ],
+            high: [
+                { title: "📈 الدوال الخطية", content: "الدالة الخطية: ص = أ س + ب. ميل الخط = أ. مثال: ص = 2س + 1 ميله 2." },
+                { title: "🧮 التفاضل basics", content: "مشتقة الدالة: مشتقة سⁿ = ن·سⁿ⁻¹. مثال: مشتقة س² = 2س." },
+                { title: "🔢 المتتاليات الحسابية", content: "حدود متتالية حسابية: حن = ح1 + (ن-1)د. مثال: 3, 7, 11, ... الأساس د=4." }
+            ]
+        },
+        physics: {
+            middle: [
+                { title: "⚡ الحركة والسرعة", content: "السرعة = المسافة / الزمن. إذا قطعت 100 متر في 20 ثانية، السرعة = 5 م/ث." },
+                { title: "💡 الضوء", content: "الضوء ينتقل في خطوط مستقيمة، سرعته 300 ألف كم/ث تقريباً." },
+                { title: "🧲 المغناطيسية", content: "للمغناطيس قطب شمالي وجنوبي، الأقطاب المتشابهة تتنافر والمختلفة تتجاذب." }
+            ],
+            high: [
+                { title: "🏎️ قوانين نيوتن", content: "القانون الثاني: القوة = الكتلة × التسارع (ق = ك × ت)." },
+                { title: "⚛️ الكهرباء", content: "قانون أوم: الجهد = التيار × المقاومة (ج = ت × م)." },
+                { title: "🌊 الموجات", content: "الطول الموجي × التردد = سرعة الموجة. الموجات الصوتية تحتاج لوسط." }
+            ]
+        },
+        science: {
+            middle: [
+                { title: "🌱 الخلية النباتية", content: "تحتوي على جدار خلوي، بلاستيدات خضراء، فجوة عصارية كبيرة." },
+                { title: "🦴 الجهاز الهيكلي", content: "يتكون من 206 عظمة، يحمي الأعضاء ويساعد على الحركة." },
+                { title: "🌍 طبقات الأرض", content: "القشرة، الستار، اللب الخارجي، اللب الداخلي." }
+            ],
+            high: [
+                { title: "🧬 DNA", content: "الحمض النووي يحمل الشفرة الوراثية، يتكون من قواعد A,T,C,G." },
+                { title: "⚖️ التوازن البيئي", content: "السلاسل الغذائية: منتجون، مستهلكون، محللون." },
+                { title: "🔬 الانقسام الميتوزي", content: "ينتج خليتين متطابقتين، يستخدم للنمو والتعويض." }
+            ]
+        }
+    };
+
+    // حقائق ممتعة عشوائية
+    const funFacts = [
+        "🐙 الأخطبوط له ثلاثة قلوب!",
+        "🌌 نجم النيوترون ملعقة صغيرة منه تزن مليار طن.",
+        "🧠 الدماغ البشري يولد كهرباء كافية لتشغيل لمبة صغيرة.",
+        "🐜 النمل لا ينام أبداً!",
+        "🍕 البيتزا تأتي من إيطاليا لكن المصريين القدامى صنعوا خبزاً بالجبن.",
+        "🎈 الهيليوم أخف من الهواء ولهذا يرفع البالونات."
+    ];
+
+    let currentSubject = "math";
+    let currentLevel = "middle";   // middle or high
+
+    // عناصر DOM
+    const dynamicDiv = document.getElementById("dynamicContent");
+    const homeBtn = document.getElementById("homeBtn");
+    const gameNavBtn = document.getElementById("gameNavBtn");
+
+    // دالة عرض المواد حسب المستوى والمادة
+    function renderSubject(subject, level) {
+        const data = lessonsData[subject];
+        if (!data) return;
+        const lessons = data[level];
+        let html = `<div style="text-align:center;"><h2>📘 ${subject === 'math' ? 'الرياضيات' : subject === 'physics' ? 'الفيزياء' : 'العلوم الطبيعية'}</h2>`;
+        html += `<div class="level-buttons">
+                    <button class="level-btn ${level === 'middle' ? 'active' : ''}" data-level="middle">📖 المستوى المتوسط (11-15 سنة)</button>
+                    <button class="level-btn ${level === 'high' ? 'active' : ''}" data-level="high">🚀 المستوى الثانوي (16-22 سنة)</button>
+                 </div>`;
+        html += `<div>`;
+        lessons.forEach(lesson => {
+            html += `<div class="lesson-card">
+                        <h3>${lesson.title}</h3>
+                        <p>${lesson.content}</p>
+                    </div>`;
+        });
+        // حقيقة ممتعة
+        const randomFact = funFacts[Math.floor(Math.random() * funFacts.length)];
+        html += `<div class="fun-fact">💡 <strong>هل تعلم؟</strong> ${randomFact}</div>`;
+        html += `<div class="game-area" id="miniQuizArea">
+                    <h3>🎯 اختبار سريع (${subject === 'math' ? 'رياضيات' : subject === 'physics' ? 'فيزياء' : 'علوم'})</h3>
+                    <p>اختبر معلوماتك: سؤال تفاعلي</p>
+                    <div id="quizContainer"></div>
+                    <button id="newQuizBtn">🔄 سؤال جديد</button>
+                </div>`;
+        html += `</div>`;
+        dynamicDiv.innerHTML = html;
+
+        // إضافة مستمعي الأزرار لمستويات
+        document.querySelectorAll('.level-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const newLevel = btn.getAttribute('data-level');
+                currentLevel = newLevel;
+                renderSubject(currentSubject, currentLevel);
+            });
+        });
+        // توليد سؤال عشوائي حسب المادة والمستوى
+        generateQuiz(subject, level);
+        document.getElementById("newQuizBtn")?.addEventListener('click', () => generateQuiz(subject, level));
+    }
+
+    // أسئلة تفاعلية حسب المادة والمستوى (قاعدة بيانات بسيطة)
+    function generateQuiz(subject, level) {
+        let questionBank = [];
+        if (subject === 'math') {
+            if (level === 'middle') {
+                questionBank = [
+                    { q: "ما ناتج 15 × 4 ؟", options: ["50", "60", "70", "80"], correct: "60" },
+                    { q: "إذا كان س + 7 = 15 ، فما قيمة س؟", options: ["6", "7", "8", "9"], correct: "8" },
+                    { q: "مساحة مستطيل طوله 8 سم وعرضه 3 سم؟", options: ["24 سم²", "11 سم²", "32 سم²", "18 سم²"], correct: "24 سم²" }
+                ];
+            } else {
+                questionBank = [
+                    { q: "مشتقة الدالة س³ هي ؟", options: ["3س²", "س²", "2س", "3س"], correct: "3س²" },
+                    { q: "إذا كانت د(س)= 2س+3 ، فما قيمة د(4)؟", options: ["8", "11", "10", "9"], correct: "11" },
+                    { q: "ما قيمة لوغاريتم 100 للأساس 10 ؟", options: ["1", "2", "10", "100"], correct: "2" }
+                ];
+            }
+        } else if (subject === 'physics') {
+            if (level === 'middle') {
+                questionBank = [
+                    { q: "وحدة قياس السرعة هي ؟", options: ["متر", "ثانية", "متر/ثانية", "كيلوجرام"], correct: "متر/ثانية" },
+                    { q: "القوة التي تجذب الأجسام نحو الأرض تسمى؟", options: ["المغناطيسية", "الجاذبية", "الاحتكاك", "الشد"], correct: "الجاذبية" },
+                    { q: "أي من هذه مواد عازلة للكهرباء؟", options: ["نحاس", "حديد", "مطاط", "فضة"], correct: "مطاط" }
+                ];
+            } else {
+                questionBank = [
+                    { q: "قانون نيوتن الثاني ينص على أن القوة = .... ؟", options: ["الكتلة × التسارع", "الكتلة / التسارع", "السرعة × الزمن", "العمل / الزمن"], correct: "الكتلة × التسارع" },
+                    { q: "وحدة قياس المقاومة الكهربائية؟", options: ["فولت", "أمبير", "أوم", "وات"], correct: "أوم" },
+                    { q: "سرعة الضوء في الفراغ تقارب؟", options: ["300,000 كم/ث", "150,000 كم/ث", "3,000 كم/ث", "30,000 كم/ث"], correct: "300,000 كم/ث" }
+                ];
+            }
+        } else if (subject === 'science') {
+            if (level === 'middle') {
+                questionBank = [
+                    { q: "أي عضو يقوم بضخ الدم؟", options: ["الرئة", "الكبد", "القلب", "المعدة"], correct: "القلب" },
+                    { q: "النباتات تصنع غذاءها بواسطة عملية؟", options: ["التنفس", "البناء الضوئي", "الهضم", "التخمر"], correct: "البناء الضوئي" },
+                    { q: "أكبر كوكب في المجموعة الشمسية؟", options: ["المريخ", "زحل", "المشتري", "الأرض"], correct: "المشتري" }
+                ];
+            } else {
+                questionBank = [
+                    { q: "ما اسم الحمض النووي الذي يحمل الشفرة الوراثية؟", options: ["RNA", "DNA", "بروتين", "إنزيم"], correct: "DNA" },
+                    { q: "الخلايا التي تنقل السيالات العصبية تسمى؟", options: ["خلايا دهنية", "خلايا عصبية", "خلايا دم حمراء", "خلايا عضلية"], correct: "خلايا عصبية" },
+                    { q: "أي عضو مسؤول عن تنقية الدم في جسم الإنسان؟", options: ["القلب", "الرئتين", "الكليتين", "البنكرياس"], correct: "الكليتين" }
+                ];
+            }
+        }
+
+        if (questionBank.length === 0) return;
+        const randomIndex = Math.floor(Math.random() * questionBank.length);
+        const qItem = questionBank[randomIndex];
+        const quizContainer = document.getElementById("quizContainer");
+        if (!quizContainer) return;
+        let quizHtml = `<div style="margin:15px 0;"><strong>❓ ${qItem.q}</strong></div>`;
+        qItem.options.forEach(opt => {
+            quizHtml += `<div class="quiz-option" data-answer="${opt}">🔹 ${opt}</div>`;
+        });
+        quizHtml += `<div id="quizFeedback" style="margin-top:10px;"></div>`;
+        quizContainer.innerHTML = quizHtml;
+
+        document.querySelectorAll('.quiz-option').forEach(optDiv => {
+            optDiv.addEventListener('click', (e) => {
+                const selected = optDiv.getAttribute('data-answer');
+                const feedback = document.getElementById("quizFeedback");
+                if (selected === qItem.correct) {
+                    feedback.innerHTML = "✅ ✅ إجابة صحيحة! أحسنت 🎉";
+                    feedback.style.color = "green";
+                    // تأثير متعة
+                    optDiv.style.backgroundColor = "#c8e6c9";
+                } else {
+                    feedback.innerHTML = `❌ إجابة خاطئة. الإجابة الصحيحة هي: ${qItem.correct}. حاول مرة أخرى! 💪`;
+                    feedback.style.color = "#c0392b";
+                    optDiv.style.backgroundColor = "#ffcdd2";
+                }
+                // تعطيل النقر بعد الإجابة
+                document.querySelectorAll('.quiz-option').forEach(opt => opt.style.pointerEvents = "none");
+                setTimeout(() => {
+                    generateQuiz(subject, level);
+                }, 1800);
+            });
+        });
+    }
+
+    // صفحة الألعاب والتسلية التفاعلية
+    function showGamePage() {
+        let gameHtml = `
+            <h2 style="text-align:center;">🎮 ركن المرح والتحدي 🎲</h2>
+            <p style="text-align:center;">ألعاب ذهنية ومسابقات لتستمتع أثناء التعلم!</p>
+            <div class="game-area">
+                <h3>🧠 تحدي الحساب السريع 🧠</h3>
+                <p>اختبر سرعتك في العمليات الحسابية:</p>
+                <div id="mathGame">
+                    <p id="questionGame">اضغط "سؤال جديد" للبدء</p>
+                    <input type="number" id="answerInput" placeholder="اكتب إجابتك" style="padding:10px; border-radius:40px; margin:10px; width:150px;">
+                    <button id="checkAnswer">تأكيد</button>
+                    <button id="newMathQuestion">➕ سؤال جديد</button>
+                    <p id="gameFeedback"></p>
+                </div>
+            </div>
+            <div class="game-area">
+                <h3>🎲 هل تعلم؟ لحظة مرح</h3>
+                <p id="randomFunFactDisplay">${funFacts[Math.floor(Math.random() * funFacts.length)]}</p>
+                <button id="newFactBtn">✨ حقيقة جديدة</button>
+            </div>
+            <div class="game-area">
+                <h3>⚡ تحدّي الفيزياء الخاطف</h3>
+                <button id="quickPhysicsQuiz">ابدأ مسابقة فيزياء سريعة (سؤال واحد)</button>
+                <div id="quickQuizResult"></div>
+            </div>
+        `;
+        dynamicDiv.innerHTML = gameHtml;
+
+        // لعبة الرياضيات
+        let currentMathQuestion = null;
+        let currentAnswer = 0;
+
+        function generateMathQuestion() {
+            const operations = ['+', '-', '*'];
+            const op = operations[Math.floor(Math.random() * operations.length)];
+            let a, b, answer;
+            if (op === '+') { a = Math.floor(Math.random() * 50) + 1; b = Math.floor(Math.random() * 50) + 1; answer = a + b; }
+            else if (op === '-') { a = Math.floor(Math.random() * 50) + 30; b = Math.floor(Math.random() * a) + 1; answer = a - b; }
+            else { a = Math.floor(Math.random() * 12) + 1; b = Math.floor(Math.random() * 12) + 1; answer = a * b; }
+            const questionText = `${a} ${op} ${b} = ؟`;
+            return { text: questionText, answer: answer };
+        }
+
+        function refreshMath() {
+            currentMathQuestion = generateMathQuestion();
+            document.getElementById("questionGame").innerHTML = `🧮 ${currentMathQuestion.text}`;
+            document.getElementById("answerInput").value = '';
+            document.getElementById("gameFeedback").innerHTML = '';
+        }
+
+        const newMathBtn = document.getElementById("newMathQuestion");
+        if (newMathBtn) {
+            newMathBtn.addEventListener('click', refreshMath);
+            refreshMath();
+        }
+        const checkBtn = document.getElementById("checkAnswer");
+        if (checkBtn) {
+            checkBtn.addEventListener('click', () => {
+                const userAnswer = parseInt(document.getElementById("answerInput").value);
+                if (isNaN(userAnswer)) {
+                    document.getElementById("gameFeedback").innerHTML = "⚠️ أدخل رقمًا صحيحًا!";
+                    return;
+                }
+                if (userAnswer === currentMathQuestion.answer) {
+                    document.getElementById("gameFeedback").innerHTML = "🎉 رائع! إجابة صحيحة 🎉";
+                    document.getElementById("gameFeedback").style.color = "green";
+                    refreshMath();
+                } else {
+                    document.getElementById("gameFeedback").innerHTML = `😓 خطأ! الإجابة الصحيحة هي ${currentMathQuestion.answer}. حاول سؤالاً جديداً.`;
+                    document.getElementById("gameFeedback").style.color = "red";
+                }
+            });
+        }
+
+        // حقيقة ممتعة جديدة
+        document.getElementById("newFactBtn")?.addEventListener('click', () => {
+            const newFact = funFacts[Math.floor(Math.random() * funFacts.length)];
+            document.getElementById("randomFunFactDisplay").innerText = newFact;
+        });
+
+        // مسابقة فيزياء سريعة
+        document.getElementById("quickPhysicsQuiz")?.addEventListener('click', () => {
+            const physicsQuickQuestions = [
+                { q: "ما هي وحدة قياس القوة؟", a: "نيوتن" },
+                { q: "ماذا يحدث عندما تزداد سرعة الجسم وتظل كتلته ثابتة؟", a: "تزداد طاقته الحركية" },
+                { q: "من وضع قانون الجاذبية العام؟", a: "نيوتن" }
+            ];
+            const randQ = physicsQuickQuestions[Math.floor(Math.random() * physicsQuickQuestions.length)];
+            const userAns = prompt(`سؤال فيزياء سريع: ${randQ.q}`);
+            const resultDiv = document.getElementById("quickQuizResult");
+            if (userAns && userAns.toLowerCase().trim() === randQ.a.toLowerCase()) {
+                resultDiv.innerHTML = "✅ إجابة صحيحة! أنت مبدع ⚡";
+                resultDiv.style.color = "green";
+            } else {
+                resultDiv.innerHTML = `❌ الإجابة الصحيحة: ${randQ.a}. تعلم أكثر واستمر! 🌟`;
+                resultDiv.style.color = "brown";
+            }
+        });
+    }
+
+    // أحداث التنقل
+    function setSubject(subject) {
+        currentSubject = subject;
+        currentLevel = "middle";
+        renderSubject(currentSubject, currentLevel);
+    }
+
+    document.querySelectorAll('[data-subject]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const sub = btn.getAttribute('data-subject');
+            setSubject(sub);
+        });
+    });
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', (e) => {
+            const sub = card.getAttribute('data-subject');
+            if(sub) setSubject(sub);
+        });
+    });
+
+    homeBtn.addEventListener('click', () => {
+        dynamicDiv.innerHTML = `<h2 style="text-align:center;">✨ مرحباً مجدداً ✨</h2>
+        <p style="text-align:center; font-size:1.2rem;">اختر مادة من الأعلى أو البطاقات أو اذهب إلى الألعاب.</p>
+        <div style="text-align:center;"><button id="homeGameBtn">🎮 اذهب إلى الألعاب</button></div>`;
+        document.getElementById("homeGameBtn")?.addEventListener('click', showGamePage);
+    });
+
+    gameNavBtn.addEventListener('click', showGamePage);
+    document.getElementById("startGameQuick")?.addEventListener('click', showGamePage);
+
+    // إظهار الصفحة الافتتاحية بشكل افتراضي
+    homeBtn.click();
+</script>
+</body>
+</html>
+</body>
+</html>
